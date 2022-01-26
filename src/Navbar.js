@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useContext} from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -9,13 +9,11 @@ import Switch from "@material-ui/core/Switch";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles/NavBarStyles";
 import {ThemeContext} from './contexts/ThemeProvider';
-import {LanguageContext, withLanguageProvider} from './contexts/LanguageProvider';
-class Navbar extends Component {
-  static contextType = ThemeContext;
-  render() {
-    const {isDarkMode, toggleTheme} = this.context;
-    const { classes } = this.props;
-    const {language} = this.props.Languagecontext;
+import {LanguageContext} from './contexts/LanguageProvider';
+function Navbar(props){
+    const {isDarkMode, toggleTheme} = useContext(ThemeContext);
+    const { classes } = props;
+    const {language} = useContext(LanguageContext);
     const flags = {
       english:{
         flag: "🇬🇧",
@@ -98,5 +96,4 @@ class Navbar extends Component {
             </div>
           )
   }
-}
-export default withLanguageProvider(withStyles(styles)(Navbar));
+export default withStyles(styles)(Navbar);

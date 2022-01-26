@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useContext} from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -15,9 +15,8 @@ import Select from "@material-ui/core/Select";
 import withStyles from "@material-ui/core/styles/withStyles";
 import styles from "./styles/FormStyles";
 import { LanguageContext } from './contexts/LanguageProvider';
-class Form extends Component {
-  static contextType = LanguageContext;
-  render() {
+function Form(props){
+  const {changeLanguage, language} = useContext(LanguageContext);
     const translate = {
       english: {
         signIn: "sign In",
@@ -45,8 +44,7 @@ class Form extends Component {
       }
     }
     let words = {};
-    const {changeLanguage, language} = this.context;
-    const { classes } = this.props;
+    const { classes } = props;
     if(language === "english")
       words = translate.english;
     if(language === "french")
@@ -55,7 +53,6 @@ class Form extends Component {
       words = translate.arabic;
     if(language === "spanish")
       words = translate.spanish;
-    console.log(language==="english"?true:false);
     return (
       <main className={classes.main}>
         <Paper className={classes.paper}>
@@ -96,5 +93,4 @@ class Form extends Component {
       </main>
     );
   }
-}
 export default withStyles(styles)(Form);
